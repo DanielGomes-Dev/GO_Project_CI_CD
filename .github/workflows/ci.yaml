@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go: ['1.22', '1.15']
+        go: ['1.22', '1.21']
     steps:
       - uses: actions/checkout@v4 # Acttions "checkout" baixa os arquivos do github
       - uses: actions/setup-go@v5 # Pega o ambiente da maquina e bota o go para funcionar
