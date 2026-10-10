@@ -35,4 +35,4 @@ jobs:
         with:
           push: false
           context: .
-          tags: dgs/app:GO_Project_CI_CD:latest
+          tags: dgs/app:go_project_ci_cd:latest
