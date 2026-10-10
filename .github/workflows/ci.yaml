@@ -1,7 +1,4 @@
 name: ci-golang-workflow
-# on: [psuh]
-# on: [pull_request]
-
 on:
   pull_request:
     branches:
@@ -10,13 +7,32 @@ on:
 jobs:
   check-application:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        go: ['1.22', '1.21']
     steps:
-      - uses: actions/checkout@v4 # Acttions "checkout" baixa os arquivos do github
+
+      - name: Download Code Files
+        uses: actions/checkout@v6 # Acttions "checkout" baixa os arquivos do github
+
       - uses: actions/setup-go@v5 # Pega o ambiente da maquina e bota o go para funcionar
         with:
-          go-version: ${{matrix.go}}
+          go-version: 1.22
+
+
       - run: go test
       - run: go run math.go
+
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v4
+
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      -
+        name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v7
+        with:
+          push: false
+          context: .
+          tags: dgs/go-project-ci-cd:latest
