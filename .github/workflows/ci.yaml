@@ -42,4 +42,4 @@ jobs:
         with:
           push: true
           context: .
-          tags: dgs/go-project-ci-cd:latest
+          tags: stark021/go-project-ci-cd:latest
